@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "this is a plugin used to determine whether a page has crashed",
   "main": "libs/index.js",
+  "files": [
+    "libs/"
+  ],
   "scripts": {
     "build": "rollup -c rollup.config.js",
     "type-check": "tsc --p tsconfig.json  --noEmit --skipLibCheck "
