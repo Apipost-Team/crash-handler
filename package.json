@@ -3,12 +3,9 @@
   "version": "1.0.0",
   "description": "this is a plugin used to determine whether a page has crashed",
   "main": "libs/index.js",
-  "dependencies": {
-    "lodash": "^4.17.21"
-  },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c rollup.config.js",
+    "type-check": "tsc --p tsconfig.json  --noEmit --skipLibCheck "
   },
   "repository": {
     "type": "git",
@@ -26,5 +23,21 @@
   "bugs": {
     "url": "https://github.com/Apipost-Team/crash-handler/issues"
   },
-  "homepage": "https://github.com/Apipost-Team/crash-handler#readme"
+  "homepage": "https://github.com/Apipost-Team/crash-handler#readme",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-typescript": "^11.1.1",
+    "@types/lodash": "^4.14.194",
+    "@types/react": "17.0.2",
+    "rollup": "^2.79.1",
+    "rollup-plugin-dts": "^4.2.2",
+    "tslib": "^2.4.1",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "pre-commit": [
+    "type-check"
+  ]
 }

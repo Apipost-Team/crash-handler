@@ -1,0 +1,45 @@
+{
+  "eslint.enable": true,
+  "eslint.run": "onType",
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true,
+      "eslint.autoFixOnSave": true,
+      "source.fixAll.markdownlint": true,
+      "source.fixAll.stylelint": true
+  },
+  // dbaeumer.vscode-eslint | esbenp.prettier-vscode
+  "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "stylelint.enable": true,
+  "stylelint.validate": ["css", "less", "postcss", "scss", "sass"],
+  "eslint.validate": [
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "html"
+  ],
+  //todo-tree settings
+  "todo-tree.general.tags": [
+      "TODO",
+      "FIXME",
+      "TAG",
+      "DONE",
+      "NOTE",
+      "BUG",
+      "HACK"
+  ],
+}

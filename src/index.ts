@@ -1,30 +1,38 @@
-import { debounce, isArray } from 'lodash';
-import { ELEMENT_BASE_STYLE, INIT_DELAY_SECONDS, MONITOR_POINTS } from './constant';
+import { debounce, isArray } from "lodash";
+import {
+  ELEMENT_BASE_STYLE,
+  INIT_DELAY_SECONDS,
+  MONITOR_POINTS,
+} from "./constant";
 
 type ObserveListener = (status: boolean) => void;
+declare var IntersectionObserver: any;
 
 class CrashHandler {
-  private readonly POINT_CLASS_NAME_PREFIX = 'MONITOR_POINT';
+  private readonly POINT_CLASS_NAME_PREFIX = "MONITOR_POINT";
 
-  private observeHandlers:ObserveListener[] = [];
+  private observeHandlers: ObserveListener[] = [];
 
-  private pointElements:Element[]|null = null;
+  private pointElements: Element[] | null = null;
 
   // 清除所有采样点
   private clearPoints(): void {
-    const prePointElements = document.querySelectorAll(`.${this.POINT_CLASS_NAME_PREFIX}`);
+    const prePointElements = document.querySelectorAll(
+      `.${this.POINT_CLASS_NAME_PREFIX}`
+    );
     prePointElements.forEach((element) => {
       element.remove();
     });
   }
 
-  private emitHandler(pointsVisible) {
+  private emitHandler(pointsVisible: { [key: string]: boolean }): void {
     let isWhiteScreen = false;
     Object.values(pointsVisible).forEach((visible) => {
       if (visible === false) {
         isWhiteScreen = true;
       }
     });
+
     this.observeHandlers.forEach((callBackFn) => {
       callBackFn(isWhiteScreen);
     });
@@ -35,8 +43,8 @@ class CrashHandler {
   private bindElementVisibleHandler(pointElements: Element[]): void {
     pointElements.forEach((element, index) => {
       new IntersectionObserver(
-        ([change]) => {
-          const pointsVisible = {};
+        ([change]: any) => {
+          const pointsVisible: { [key: string]: boolean } = {};
           pointsVisible[`${index}`] = change.isVisible;
           this.emitHandlerDebounce(pointsVisible);
         },
@@ -51,12 +59,12 @@ class CrashHandler {
 
   constructor() {
     this.clearPoints();
-    const elements:Element[] = [];
+    const elements: Element[] = [];
     MONITOR_POINTS.forEach((point) => {
-      const element = document.createElement('div');
+      const element = document.createElement("div");
       element.className = this.POINT_CLASS_NAME_PREFIX;
-      const monitorPoint = { ...ELEMENT_BASE_STYLE, ...point };
-      Object.entries(monitorPoint).forEach(([key, value]) => {
+      const monitorPoint: any = { ...ELEMENT_BASE_STYLE, ...point };
+      Object.entries(monitorPoint).forEach(([key, value]: any) => {
         element.style[key] = value;
       });
       elements.push(element);
@@ -72,14 +80,16 @@ class CrashHandler {
     this.observeHandlers.push(handler);
     return {
       unsubscribe: () => {
-        const deleteIndex = this.observeHandlers.findIndex((item) => item === handler);
+        const deleteIndex = this.observeHandlers.findIndex(
+          (item) => item === handler
+        );
         this.observeHandlers.splice(deleteIndex, 1);
       },
     };
   }
 
   dispose(): void {
-    if (isArray(this.pointElements)) {
+    if (this.pointElements !== null && isArray(this.pointElements)) {
       this.pointElements.forEach((element) => {
         element.remove();
       });
