@@ -1,0 +1,30 @@
+{
+  "name": "apipost-crash-handler",
+  "version": "1.0.0",
+  "description": "this is a plugin used to determine whether a page has crashed",
+  "main": "libs/index.js",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Apipost-Team/crash-handler.git"
+  },
+  "keywords": [
+    "crash",
+    "handler",
+    "catch",
+    "white",
+    "screen"
+  ],
+  "author": "Apipost-Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Apipost-Team/crash-handler/issues"
+  },
+  "homepage": "https://github.com/Apipost-Team/crash-handler#readme"
+}
