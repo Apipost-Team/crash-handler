@@ -6,6 +6,9 @@ import {
 } from "./constant";
 
 type ObserveListener = (status: boolean) => void;
+type Observable = {
+  unsubscribe: () => void;
+};
 declare var IntersectionObserver: any;
 
 class CrashHandler {
@@ -76,7 +79,7 @@ class CrashHandler {
     }, INIT_DELAY_SECONDS);
   }
 
-  subscribe(handler: ObserveListener): any {
+  subscribe(handler: ObserveListener): Observable {
     this.observeHandlers.push(handler);
     return {
       unsubscribe: () => {
